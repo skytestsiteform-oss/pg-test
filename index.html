@@ -11,7 +11,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
 <!-- Firebase -->
 <script type="module">
@@ -304,7 +304,7 @@ tr:hover td{background:var(--gray-50);}
       <span class="nav-chip chip-green" id="sync-chip">Synced</span>
       <span class="nav-chip chip-red" id="due-chip"></span>
       <!-- User dropdown -->
-      <div class="user-pill" id="user-pill" onclick="toggleUserMenu()">
+      <div class="user-pill" id="user-pill" onclick="toggleUserMenu(event)">
         <div class="user-av" id="user-av-initial">S</div>
         <span class="user-name" id="user-name-chip">User</span>
         <span class="user-arrow">▾</span>
@@ -678,7 +678,8 @@ document.getElementById('l-pass').addEventListener('keydown',e=>{if(e.key==='Ent
 function doLogout(){window.__signOut();}
 
 // ── USER MENU ─────────────────────────────────────────────────────────────────
-function toggleUserMenu(){
+function toggleUserMenu(e){
+  if(e) e.stopPropagation();
   const dd=document.getElementById('user-dropdown');
   dd.classList.toggle('open');
 }
